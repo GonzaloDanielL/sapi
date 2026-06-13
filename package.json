@@ -1,0 +1,33 @@
+{
+  "name": "@chalo_l/sapi",
+  "version": "1.0.0",
+  "type": "module",
+  "bin": {
+    "sapi": "dist/index.cjs"
+  },
+  "description": "CLI modular para scaffolding de proyectos web con arquitectura CSS-First y Tailwind v4",
+  "main": "index.js",
+  "scripts": {
+    "dev": "tsup src/index.ts --format cjs --watch",
+    "build": "tsup src/index.ts --format cjs --minify",
+    "start": "node dist/index.cjs"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "packageManager": "pnpm@10.23.0",
+  "dependencies": {
+    "@clack/prompts": "^1.3.0",
+    "fs-extra": "^11.3.4",
+    "picocolors": "^1.1.1"
+  },
+  "devDependencies": {
+    "@types/fs-extra": "^11.0.4",
+    "@types/node": "^25.6.0",
+    "tsup": "^8.5.1",
+    "typescript": "^6.0.3"
+  },
+  "files": [
+    "dist"
+  ]
+}
