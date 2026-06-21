@@ -27,7 +27,7 @@
     "frontend"
   ],
   "author": "",
-  "license": "ISC",
+  "license": "MIT",
   "packageManager": "pnpm@10.23.0",
   "dependencies": {
     "@clack/prompts": "^1.3.0",
