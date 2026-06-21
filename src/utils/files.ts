@@ -13,7 +13,7 @@ import path from 'path';
  */
 export async function createFolderStructure(projectPath: string, structure: string, framework: string): Promise<void> {
     // Define el directorio base operativo según los estándares de arquitectura de cada framework
-    const baseDir = framework === 'next' ? projectPath : path.join(projectPath, 'src');
+    const baseDir = path.join(projectPath, 'src');
 
     // Mapeo estructurado de carpetas comerciales y modulares por nivel de complejidad
     const structures: Record<string, string[]> = {
@@ -29,7 +29,7 @@ export async function createFolderStructure(projectPath: string, structure: stri
     for (const folder of foldersToCreate) {
         // Exclusión quirúrgica de directorios en Next.js para evitar colisiones con el enrutador físico nativo
         if (framework === 'next' && (folder === 'styles' || folder === 'layouts')) {
-            continue; 
+            continue;
         }
         await fs.ensureDir(path.join(baseDir, folder));
     }

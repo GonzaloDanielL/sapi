@@ -1,5 +1,4 @@
 import { handleInit } from './commands/init';
-import { handleSync } from './commands/sync';
 
 /**
  * Punto de entrada principal y orquestador ejecutivo de Sapi CLI.
@@ -11,12 +10,6 @@ import { handleSync } from './commands/sync';
 async function main(): Promise<void> {
     const args = process.argv.slice(2);
     const command = args[0];
-
-    // Enrutamiento del comando de sincronización de tokens de diseño: sapi sync
-    if (command === 'sync') {
-        await handleSync();
-        return;
-    }
 
     // Enrutamiento por defecto enfocado al asistente interactivo de inicialización: sapi
     await handleInit();

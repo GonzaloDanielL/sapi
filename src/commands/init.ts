@@ -5,7 +5,7 @@ import fs from 'fs-extra';
 import { runCommand } from '../utils/terminal';
 import { createFolderStructure } from '../utils/files';
 import { generateAstroTemplate } from '../utils/astroTemplate';
-import { generateNextTemplate } from '../utils/nextTemplate';  
+import { generateNextTemplate } from '../utils/nextTemplate';
 import { createEnvFile } from '../utils/env';
 import { syncTokensToCSS } from '../utils/styles';
 
@@ -143,7 +143,7 @@ export async function handleInit(): Promise<void> {
 
     const projectName = await text({
         message: '¿Cuál es el nombre de tu nuevo proyecto?',
-        placeholder: 'solcafe',
+        placeholder: 'MiProyecto',
         validate(value: string | undefined) {
             if (!value || value.trim().length === 0) return `¡El nombre es obligatorio!`;
         },
@@ -163,7 +163,7 @@ export async function handleInit(): Promise<void> {
     const projectSlug = getProjectSlug(sanitizedName);
 
     const framework = await select({
-        message: '¿En qué framework quieres plantar tus raíces?',
+        message: '¿En qué framework quieres realizar tu proyecto?',
         options: [
             { value: 'next', label: 'Next.js', hint: 'Apps complejas' },
             { value: 'astro', label: 'Astro', hint: 'Velocidad y contenido' },
@@ -227,7 +227,7 @@ export async function handleInit(): Promise<void> {
         await runCommand(commandInst, argsInst, process.cwd());
 
         console.log("");
-        s.start(pc.cyan('Sembrando raíces y configurando entorno de diseño...'));
+        s.start(pc.cyan('configurando entorno de diseño...'));
 
         await createFolderStructure(projectPath, structure as string, framework as string);
         await createEnvFile(projectPath);
@@ -256,18 +256,6 @@ export default defineConfig({
 
         const selectedPreset = SECTOR_PRESETS[sector as string] || SECTOR_PRESETS.limpio;
 
-        // Persistencia del archivo de configuración del ecosistema Sapi
-        const configContent = {
-            projectName: sanitizedName,
-            projectSlug,
-            framework,
-            structure,
-            sector,
-            colors: selectedPreset.colors,
-            fonts: selectedPreset.fonts
-        };
-        await fs.writeJson(path.join(projectPath, 'sapi.config.json'), configContent, { spaces: 4 });
-
         // Sincronización jerárquica del archivo de estilos globales CSS
         await syncTokensToCSS(projectPath, framework as string, projectSlug, selectedPreset.colors, selectedPreset.fonts);
 
@@ -280,7 +268,17 @@ export default defineConfig({
             }
         }
 
-        s.stop(pc.green('Raíces y dependencias plantadas con éxito.'));
+        if (framework === 'next') {
+            const oldAppPath = path.join(projectPath, 'app');
+            const newAppPath = path.join(projectPath, 'src', 'app');
+
+            if (await fs.pathExists(oldAppPath)) {
+                // fs.move de 'fs-extra' mueve la carpeta completa con todo su contenido interno de un solo golpe
+                await fs.move(oldAppPath, newAppPath, { overwrite: true });
+            }
+        }
+
+        s.stop(pc.green('Carpetas creadas con éxito y dependencias instaladas.'));
 
         note(
             `Carpeta: ${pc.cyan(sanitizedName)}\nVariables CSS: ${pc.green(`--color-${projectSlug}-*`)}\nServidor dev: ${pc.yellow(`cd ${sanitizedName} && pnpm run dev`)}`,
@@ -288,7 +286,7 @@ export default defineConfig({
         );
 
     } catch (err) {
-        s.stop(pc.red('Hubo un problema al plantar las raíces.'));
+        s.stop(pc.red('Hubo un problema al configurar el proyecto.'));
         console.error(err);
         process.exit(1);
     }

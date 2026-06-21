@@ -58,7 +58,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="es" className="h-full antialiased" suppressHydrationWarning>
-      <body className="min-h-full flex flex-col">\${children}</body>
+      <body className="min-h-full flex flex-col">{children}</body>
     </html>
   );
 }`;
@@ -163,8 +163,8 @@ export default function Home() {
               className="text-${projectSlug}-${bgLightKey}/80 dark:text-${projectSlug}-${wLightKey}/80 border border-${projectSlug}-${bgLightKey}/0 dark:border-${projectSlug}-${wLightKey}/5 rounded-full p-2.5 bg-${projectSlug}-${wLightKey} dark:bg-${projectSlug}-${bgLighterKey} flex hover:text-${projectSlug}-${colorBaseName}-dark dark:hover:text-${projectSlug}-${colorBaseName}-light hover:border-${projectSlug}-${bgLightKey}/10 dark:hover:border-${projectSlug}-${wLightKey}/10 hover:-translate-y-0.5 hover:shadow-sm active:translate-y-0.5 active:scale-95 transition-all duration-200"
               aria-label="Toggle Theme"
             >
-              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" className="w-5 h-5 block dark:hidden"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path></svg>
-              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" className="w-5 h-5 hidden dark:block"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2"></path><path d="M12 20v2"></path><path d="m4.93 4.93 1.41 1.41"></path><path d="m17.66 17.66 1.41 1.41"></path><path d="M2 12h2"></path><path d="M20 12h2"></path><path d="m6.34 17.66-1.41 1.41"></path><path d="m19.07 4.93-1.41 1.41"></path></svg>
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5 block dark:hidden"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path></svg>
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5 hidden dark:block"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2"></path><path d="M12 20v2"></path><path d="m4.93 4.93 1.41 1.41"></path><path d="m17.66 17.66 1.41 1.41"></path><path d="M2 12h2"></path><path d="M20 12h2"></path><path d="m6.34 17.66-1.41 1.41"></path><path d="m19.07 4.93-1.41 1.41"></path></svg>
             </button>
           </div>
         </nav>
